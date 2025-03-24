@@ -14,7 +14,7 @@ pip install janome jaconv
 
 コードの説明
 
-    load_texts.py: メインの処理スクリプトです。
+    mainapp.py: メインの処理スクリプトです。
     extract_hiragana(text): テキストからひらがなを抽出します。
     preprocess_text(text): テキストの前処理（改行、空白の正規化、カタカナ変換）を行います。
     read_text_with_bom_removal(filepath, encoding='utf-8'): BOM付きの可能性のあるテキストファイルを読み込みます。
