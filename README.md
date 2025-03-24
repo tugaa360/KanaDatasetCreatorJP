@@ -18,6 +18,6 @@ pip install janome jaconv
     extract_hiragana(text): テキストからひらがなを抽出します。
     preprocess_text(text): テキストの前処理（改行、空白の正規化、カタカナ変換）を行います。
     read_text_with_bom_removal(filepath, encoding='utf-8'): BOM付きの可能性のあるテキストファイルを読み込みます。
-    output_comparison_data(filename, original_text, preprocessed_text, hiragana_text, output_folder): 比較結果を TSV ファイルに出力します。
+    output_comparison_data(filename, original_text, preprocessed_text, hiragana_text, output_folder): 比較結果を TSV ファイルとJSONL ファイルに出力します。
     process_file(filename, input_folder, output_folder): 個々のテキストファイルを処理します。
     load_text_files(folder_path): 指定されたフォルダ内の .txt ファイルのリストを取得します。
