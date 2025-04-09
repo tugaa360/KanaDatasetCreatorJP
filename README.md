@@ -10,6 +10,8 @@
 このコードを実行するには、以下のライブラリが必要です。
 
 ```bash
+pip install -r requirements.txt
+もしくは
 pip install pyopenjtalk PyYAML jaconv janome
 
 コードの説明
