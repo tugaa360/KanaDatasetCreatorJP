@@ -1,2 +1,3 @@
 janome
 jaconv
+pykakasi
