@@ -1,0 +1,53 @@
+# normalization_rules.yaml
+# 音声合成向けテキスト正規化ルール (例)
+
+unicode_normalize: NFKC  # NFKCで正規化
+
+remove_whitespace: true # True:連続する空白を1つに, 前後の空白削除
+
+# 読み上げる記号 (前後にスペースを入れると分かち書きされやすい)
+replace_symbols:
+  '&': ' アンド '
+  '%': ' パーセント '
+  '+': ' プラス '
+  '=': ' イコール '
+  '¥': ' 円 '   # 数字変換と組み合わせる必要あり
+  '$': ' ドル '
+  '℃': ' ド '
+  # 必要に応じて追加
+
+# 発話しない記号 (正規表現で指定)
+remove_symbols: '[「」『』【】［］（）<>‘’“”・※→←↑↓*＃〜]'
+
+# 句読点の扱い
+punctuation:
+  remove: false        # True:削除, False:置換
+  replacement: ' <pau> ' # 置換文字 (ポーズタグなど)
+  target: '、。？！'   # 対象の句読点
+
+# 数字変換ルール (詳細は TextNormalizer 内のロジックで実装)
+number_conversion:
+  enabled: true
+  target: '\d+([\.,]\d+)?' # 整数、小数、カンマ区切りに対応するパターン (要調整)
+
+# アルファベット変換ルール
+alphabet_conversion:
+  enabled: true
+  rule: 'spellout' # 'spellout' (A->エー) or 'word' (辞書)
+  dictionary:      # rule='word' でなくても、特定の単語はこちらで定義可能
+    'AI': ' エーアイ '
+    'USB': ' ユーエスビー '
+    'DX': ' ディーエックス '
+    # 必要に応じて追加
+
+# カスタム置換ルール (正規表現、上から順に適用)
+# 特定のドメイン知識に基づく置換などに使う
+custom_replacements_pre: # 数字変換などの前に行う置換
+  - pattern: '(株)'
+    replacement: ' カブシキガイシャ '
+  - pattern: 'ＪＲ' # 全角を半角に (NFKCで処理されるはずだが念のため)
+    replacement: 'JR'
+
+custom_replacements_post: # 全ての処理の後に行う置換
+  - pattern: ' {2,}' # 複数のスペースを1つに (最終調整)
+    replacement: ' '
