@@ -2,3 +2,4 @@ janome
 jaconv
 pykakasi
 pyopenjtalk
+PyYAML
