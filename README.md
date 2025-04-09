@@ -10,14 +10,26 @@
 このコードを実行するには、以下のライブラリが必要です。
 
 ```bash
-pip install janome jaconv
+pip install pyopenjtalk PyYAML jaconv janome
 
 コードの説明
+# pyopenjtalkを使用し、JSONLとLAB形式で出力、比較データも出力
+python your_script_name.py \
+    --input_files input1.txt input2.txt \
+    --output_folder ./corpus_output \
+    --engine pyopenjtalk \
+    --output_format jsonl \
+    --output_lab \
+    --output_comparison \
+    --norm_rules normalization_rules.yaml \
+    # --jtalk_dic /path/to/open_jtalk_dic (必要なら)
+    # --jtalk_user_dic /path/to/user.dic (現在実験的)
 
-    mainapp.py: メインの処理スクリプトです。
-    extract_hiragana(text): テキストからひらがなを抽出します。
-    preprocess_text(text): テキストの前処理（改行、空白の正規化、カタカナ変換）を行います。
-    read_text_with_bom_removal(filepath, encoding='utf-8'): BOM付きの可能性のあるテキストファイルを読み込みます。
-    output_comparison_data(filename, original_text, preprocessed_text, hiragana_text, output_folder): 比較結果を TSV ファイルとJSONL ファイルに出力します。
-    process_file(filename, input_folder, output_folder): 個々のテキストファイルを処理します。
-    load_text_files(folder_path): 指定されたフォルダ内の .txt ファイルのリストを取得します。
+# Janomeを使用し、TSV形式でひらがな読みを出力
+python your_script_name.py \
+    --input_files data/*.txt \
+    --output_folder ./corpus_output_janome \
+    --engine janome \
+    --output_format tsv \
+    --reading_format hiragana \
+    # --janome_udic /path/to/janome_user.csv (必要なら)
